@@ -1,7 +1,13 @@
 <div class="row">
-    <div class="md-12 mb-3 mt-3">
+    <div class="md-6 mb-3 mt-3">
       <button class="btn btn-success me-3" (click)="sortAscending()">Sort Ascending</button>
       <button class="btn btn-success" (click)="sortDescending()">Sort Descending</button>
+    </div>
+    <div class="md-6 mb-3 mt-3">
+        <input type="checkbox" id="smaller" name="smaller" value="smaller" [(ngModel)]="filterLithuania" (change)="filter()">
+        <label for="smaller">Smaller than Lithuania</label><br>
+        <input type="checkbox" id="oceania" name="oceania" value="oceania" [(ngModel)]="filterOceania" (change)="filter()">
+        <label for="oceania">In Oceania region</label><br>
     </div>
 </div>
 <div class="card">
@@ -16,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let country of countries">
+                <tr *ngFor="let country of countriesDisplay">
                     <td>{{ country.name }}</td>
                     <td>{{ country.region }}</td>
                     <td>{{ country.area }}</td>

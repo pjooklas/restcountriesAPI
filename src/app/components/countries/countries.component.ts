@@ -10,7 +10,10 @@ import { RestCountriesService } from 'src/app/services/rest-countries.service';
 export class CountriesComponent implements OnInit {
 
   public countries:Country[]=[];
+  public countriesDisplay:Country[]=[];
   public ascending:boolean=true;
+  public filterLithuania:boolean=false;
+  public filterOceania:boolean=false;
 
   constructor(private countryService:RestCountriesService) { }
 
@@ -18,6 +21,9 @@ export class CountriesComponent implements OnInit {
   private loadCountries(){
     this.countryService.getCountries().subscribe((result)=>{
       this.countries=result;
+      this.filterCountries();
+      console.log(this.countries);
+      
     })
   }
 
@@ -27,10 +33,31 @@ export class CountriesComponent implements OnInit {
 
 // sort functions countries by name ascending/descending
   public sortAscending(){
-    this.countries.sort( (p:Country, p2:Country) => (p.name.localeCompare(p2.name)));   
+    this.countriesDisplay.sort( (p:Country, p2:Country) => (p.name.localeCompare(p2.name)));   
   }
   public sortDescending(){
-    this.countries.sort((p:Country, p2:Country) => (p2.name.localeCompare(p.name)));
+    this.countriesDisplay.sort((p:Country, p2:Country) => (p2.name.localeCompare(p.name)));
+  }
+
+// filter functions
+private filterCountries(){
+  this.countriesDisplay=[];
+  const lithuaniaArea:number=65300;
+  this.countries.forEach((country)=>{ 
+    if (this.filterLithuania==false && this.filterOceania==false ) {
+      this.countriesDisplay=this.countries;
+    };
+    if (this.filterLithuania==true && (country.area < lithuaniaArea) ) {
+      this.countriesDisplay.push(country);
+    };
+    if (this.filterOceania==true && country.region=='Oceania') {
+      this.countriesDisplay.push(country);
+    };
+  })
+}
+
+  public filter(){
+    this.filterCountries();
   }
 
 }
