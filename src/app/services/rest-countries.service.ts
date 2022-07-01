@@ -10,10 +10,6 @@ export class RestCountriesService {
 
   constructor(private http:HttpClient) { }
 
-  // public getCountry(){
-  //   return this.http.get<Country>('https://restcountries.com/v2/all?fields=name,region,area');
-  // }
-
   public getCountries(){
     return this.http.get<{[key:string]:Country}>("https://restcountries.com/v2/all?fields=name,region,area").pipe(
       map((response)=>{
