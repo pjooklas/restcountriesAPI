@@ -1,0 +1,21 @@
+<div class="card">
+    <div class="card-header">Countries list</div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Region</th>
+                    <th>Area</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let country of countries">
+                    <td>{{ country.name }}</td>
+                    <td>{{ country.region }}</td>
+                    <td>{{ country.area }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
