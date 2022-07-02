@@ -6,13 +6,11 @@ import { AppComponent } from './app.component';
 import { CountriesComponent } from './components/countries/countries.component';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CountriesComponent,
-    PaginationComponent
   ],
   imports: [
     BrowserModule,
