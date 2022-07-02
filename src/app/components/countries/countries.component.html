@@ -3,26 +3,27 @@
       <button class="btn btn-success me-3" (click)="sortAscending()">Sort Ascending</button>
       <button class="btn btn-success" (click)="sortDescending()">Sort Descending</button>
     </div>
-    <div class="md-6 mb-3 mt-3">
+    <div class="col-md-6 mb-3 mt-3">
         <input type="checkbox" id="smaller" name="smaller" value="smaller" [(ngModel)]="filterLithuania" (change)="filter()">
         <label for="smaller">Smaller than Lithuania</label><br>
         <input type="checkbox" id="oceania" name="oceania" value="oceania" [(ngModel)]="filterOceania" (change)="filter()">
         <label for="oceania">In Oceania region</label><br>
     </div>
 </div>
+
 <div class="card">
     <div class="card-header">Countries list</div>
     <div class="card-body">
         <table class="table">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Region</th>
-                    <th>Area</th>
+                    <th class="col-md-6">Name</th>
+                    <th class="col-md-4">Region</th>
+                    <th class="col-md-2">Area</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let country of countriesDisplay">
+                <tr *ngFor="let country of countriesDisplay | paginate: { itemsPerPage: 10, currentPage: p }">
                     <td>{{ country.name }}</td>
                     <td>{{ country.region }}</td>
                     <td>{{ country.area }}</td>
@@ -31,3 +32,11 @@
         </table>
     </div>
 </div>
+
+<!-- <ul>
+    <li *ngFor="let item of countriesDisplay | paginate: { itemsPerPage: 10, currentPage: p }"> 
+        
+    </li>
+</ul> -->
+             
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>

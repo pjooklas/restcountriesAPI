@@ -15,6 +15,7 @@ export class CountriesComponent implements OnInit {
   public filterLithuania:boolean=false;
   public filterOceania:boolean=false;
   public countryName:string="Lithuania";
+  public p: number = 1;
 
   constructor(private countryService:RestCountriesService) { }
 
@@ -45,6 +46,7 @@ public countryArea(){
  }
 private filterCountries(){
   this.countriesDisplay=[];
+  this.p=1;
   const lithuaniaArea:number=this.countryArea();
   this.countries.forEach((country)=>{ 
     if (this.filterLithuania==false && this.filterOceania==false ) {
