@@ -14,6 +14,7 @@ export class CountriesComponent implements OnInit {
   public ascending:boolean=true;
   public filterLithuania:boolean=false;
   public filterOceania:boolean=false;
+  public countryName:string="Lithuania";
 
   constructor(private countryService:RestCountriesService) { }
 
@@ -22,8 +23,6 @@ export class CountriesComponent implements OnInit {
     this.countryService.getCountries().subscribe((result)=>{
       this.countries=result;
       this.filterCountries();
-      console.log(this.countries);
-      
     })
   }
 
@@ -40,9 +39,13 @@ export class CountriesComponent implements OnInit {
   }
 
 // filter functions
+public countryArea(){
+  let filteredCountry = this.countries.filter(c=> c.name == this.countryName);
+  return filteredCountry[0].area;
+ }
 private filterCountries(){
   this.countriesDisplay=[];
-  const lithuaniaArea:number=65300;
+  const lithuaniaArea:number=this.countryArea();
   this.countries.forEach((country)=>{ 
     if (this.filterLithuania==false && this.filterOceania==false ) {
       this.countriesDisplay=this.countries;
@@ -55,9 +58,8 @@ private filterCountries(){
     };
   })
 }
-
-  public filter(){
-    this.filterCountries();
-  }
+public filter(){
+  this.filterCountries();
+}
 
 }
