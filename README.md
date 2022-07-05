@@ -10,6 +10,3 @@ region, and area size. Made using Angular.
   - That are smaller than Lithuania by area.
   - That are in “Oceania” region.
 - Implement pagination
-
-
-(./docs/restcountiresAPI.jpg)
