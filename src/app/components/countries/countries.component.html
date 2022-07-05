@@ -1,29 +1,37 @@
+<!-- sort buttons and filter -->
 <div class="row">
-    <div class="col-md-6 mb-3 mt-3">
-      <button class="btn btn-success me-3" (click)="sortAscending()">Sort Ascending</button>
-      <button class="btn btn-success" (click)="sortDescending()">Sort Descending</button>
+    <div class="col-md-6 mb-3 mt-3 d-flex justify-content-evenly">
+        <button class="btn btn-success" (click)="sortAscending()" [disabled]="ascending">Sort Ascending</button>
+        <button class="btn btn-success" (click)="sortDescending()" [disabled]="!ascending">Sort Descending</button>
     </div>
-    <div class="col-md-6 mb-3 mt-3">
-        <input class="me-3" type="checkbox" id="smaller" name="smaller" value="smaller" [(ngModel)]="filterLithuania" (change)="filter()">
-        <label for="smaller">Smaller than Lithuania</label><br>
-        <input class="me-3" type="checkbox" id="oceania" name="oceania" value="oceania" [(ngModel)]="filterOceania" (change)="filter()">
-        <label for="oceania">In Oceania region</label><br>
+    <div class="col-md-6 mb-3 mt-3 d-flex justify-content-evenly">
+        <div class="d-flex align-items-center">
+            <input class="me-3" type="checkbox" id="smaller" name="smaller" value="smaller" [(ngModel)]="filterLithuania" (change)="filter()">
+            <label for="smaller">Smaller than Lithuania</label><br>
+        </div>
+        <div class="d-flex align-items-center">
+            <input class="me-3" type="checkbox" id="oceania" name="oceania" value="oceania" [(ngModel)]="filterOceania" (change)="filter()">
+            <label for="oceania">In Oceania region</label><br>
+        </div>
     </div>
 </div>
 
-<div class="card">
+<!-- data list -->
+<div class="card mb-3">
     <div class="card-header">Countries list</div>
     <div class="card-body">
-        <table class="table">
+        <table class="table table-striped">
             <thead>
                 <tr>
-                    <th class="col-md-6">Name</th>
+                    <th class="col-md-1">Id</th>
+                    <th class="col-md-5">Name</th>
                     <th class="col-md-4">Region</th>
                     <th class="col-md-2">Area</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let country of countriesDisplay | paginate: { itemsPerPage: 10, currentPage: p }">
+                <tr *ngFor="let country of countriesDisplay | paginate: { itemsPerPage: 10, currentPage: p }; let i=index">
+                    <td >{{ (p-1)*10+(i+1) }}</td>
                     <td>{{ country.name }}</td>
                     <td>{{ country.region }}</td>
                     <td>{{ country.area }}</td>
@@ -33,4 +41,5 @@
     </div>
 </div>
           
-<pagination-controls (pageChange)="p = $event"></pagination-controls>
+<!-- pagination -->
+<pagination-controls (pageChange)="p = $event" class="text-center"></pagination-controls>

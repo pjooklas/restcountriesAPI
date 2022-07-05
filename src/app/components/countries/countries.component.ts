@@ -33,10 +33,12 @@ export class CountriesComponent implements OnInit {
 
 // sort functions countries by name ascending/descending
   public sortAscending(){
-    this.countriesDisplay.sort( (p:Country, p2:Country) => (p.name.localeCompare(p2.name)));   
+    this.countriesDisplay.sort( (p:Country, p2:Country) => (p.name.localeCompare(p2.name)));
+    this.ascending=true; 
   }
   public sortDescending(){
     this.countriesDisplay.sort((p:Country, p2:Country) => (p2.name.localeCompare(p.name)));
+    this.ascending=false; 
   }
 
 // filter functions
